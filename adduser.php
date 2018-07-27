@@ -2,6 +2,7 @@
 //Again, Cookie stuff, avoiding Header errors
 //Connect to database again
 include('f1_db.inc.php');
+include('header.inc.php');
 
 $userName = $_POST['userid'];
 $password = $_POST['password'];
