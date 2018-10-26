@@ -17,6 +17,7 @@ TABLE TRACKS
 TrackID - INT, PRIMARY KEY, AUTO-INCREMENT
 TrackName - VARCHAR
 RaceDate - DateTime
+RaceNumber - INT
 
 
 
@@ -90,4 +91,22 @@ RosterID - INT, PRIMARY KEY, AUTO-INCREMENT
 LeagueID - FOREIGN KEY TO Leagues.LeagueID
 UserID - FOREIGN KEY TO Users.UserID
 DriverID - FOREIGN KEY TO Drivers.DriverID
+
+
+/////////////////////
+// New Fantasy Format Logic
+///////////////////
+
+TABLE ROSTERS
+
+-Keeps track of every players' drivers
+-------------------------
+RosterID - INT, PRIMARY KEY, AUTO-INCREMENT
+LeagueID - FOREIGN KEY TO Leagues.LeagueID
+UserID - FOREIGN KEY TO Users.UserID
+DriverID - FOREIGN KEY TO Drivers.DriverID
+RaceNum - FOREIGN KEY TO Tracks.RaceNum
+
+Logic:  Races 1-10: Players cannot duplicate drivers.  Players cannot have more than 2 drivers in one race
+
 

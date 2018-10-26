@@ -1,0 +1,80 @@
+body{
+
+	font-family: Arial,sans-serif;
+	font-size: 100%;
+	color: #000000;
+	line-height: 1.166;	
+	margin: 0px;
+	padding: 0px;	
+	height: 100%;
+	background-color: #f6f3f3;
+
+}
+
+#wrapper {
+
+	position: relative;
+    min-height: 100%;
+	width: 1000px;
+	margin: auto;
+
+}
+
+#header {
+
+	background-color: #FF0000;
+	width: 1000px;
+	height: 125px;
+	position: fixed;
+	margin: auto;
+	z-index: 1;
+
+}
+
+#content {
+
+	position: absolute;
+    top: 130px;
+    left: 0px;
+    margin: auto;
+	min-width: 1000px;
+	padding-bottom: 30px;
+
+ }
+
+#standings {
+		padding: 5px;
+		border-bottom: 1px solid #E2EAEF;
+		border-top: 1px solid #E2EAEF;
+		border-right: 1px solid #E2EAEF;
+		background-color: #FF0000;
+        float: left;
+		width: 15%;
+        min-height: 275px;
+	}
+
+#mypicks {
+        padding: 10px;
+		border-top: 1px solid #E2EAEF;
+        float: left;
+		width: 60%;
+	}
+
+#results {
+		padding: 5px;
+		border-top: 1px solid #E2EAEF;
+		border-left: 1px solid #E2EAEF;
+		background-color: #FF0000;
+		float: right;
+		width: 15%;
+		min-height: 275px;
+	 }
+	 
+#footer {
+
+	background-color: #FF0000;
+	width: 1000px;
+	margin: auto;
+	position: fixed;
+	bottom: 0%;
+}
