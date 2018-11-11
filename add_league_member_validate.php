@@ -78,6 +78,39 @@
 			   {
 				   $error = true;
 			   }
+			   else
+			   {
+				   $year = date("Y");
+				   //Insert users base picks for season
+				  if(!($query3 = $con->prepare("INSERT INTO picks (UserID, LeagueID, TrackID, DriverID, Season) 
+						VALUES(?, ?, ?, ?, ?)")))
+					{
+						echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+					}
+					$query3->bindValue(1, $userID, PDO::PARAM_INT);
+					$query3->bindValue(2, $leagueID, PDO::PARAM_INT);
+					
+					$query3->bindValue(4, 0, PDO::PARAM_INT); //Driver 0 == "No Pick Driver"
+					$query3->bindValue(5, $year, PDO::PARAM_INT);				   
+				   
+				    $error = false;
+				    
+					//Loop through, bind races 0-20 and add our "no picks" for each race
+					for($x = 0; $x < 21; $x++)
+					{
+						$query3->bindValue(3, $x, PDO::PARAM_INT);
+						//Execute x2 to make 2 No picks for each race
+						$result1 = $query3->execute();
+						$result2 = $query3->execute();
+						
+						if(!$result1 || !$result2)
+					    {
+						   $error = true;
+					    }
+					}	   
+				   
+			   }
+			   
 		   }		   
 		}
 	}
@@ -103,7 +136,6 @@
 	
 	
 		<?php
-			//userName & password did not match any entries in database
 			if($error)
 			{
 					echo "<tr><td><h2>Sorry, there was an error joining league.</h2></td>\n";

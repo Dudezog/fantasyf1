@@ -28,78 +28,12 @@
 				echo "Driver Picks must be different";
 			}
 			
-			//Check if we already used these drivers
-			//Get range of races based off this race pick
-			$range1 = null;
-			$range2 = null;
-			if($raceNum <= 10)
-			{
-				$range1 = 0;
-				$range2 = 10;
-			}
-			elseif($raceNum >= 11 && $raceNum <= 20)
-			{
-				$range1 = 11;
-				$range2 = 20;
-			}
-			else
-			{
-				$range1 = 21;
-				$range2 = 21;
-			}
-			
-			if(!($query = $con->prepare("SELECT picks.*, drivers.DriverID, drivers.DriverName, tracks.RaceNumber, tracks.RaceName 
-			FROM picks, drivers, tracks 
-			WHERE picks.UserID = ? 
-			AND picks.LeagueID = ? 
-			AND (picks.DriverID = ?  OR picks.DriverID = ?) 
-			AND picks.season = ? 
-			AND (picks.RaceNumber >= ? AND picks.RaceNumber <= ?) 
-			AND picks.DriverID = drivers.DriverID 
-			AND picks.RaceNumber = tracks.RaceNumber")))
-			{
-				echo "Prepare failed: (" . $con->errno . ") " . $con->error;
-			}
-			$query->bindValue(1, $userID, PDO::PARAM_INT);
-			$query->bindValue(2, $league, PDO::PARAM_INT);
-			$query->bindValue(3, $driver1, PDO::PARAM_INT);
-			$query->bindValue(4, $driver2, PDO::PARAM_INT);
-			$query->bindValue(5, $year, PDO::PARAM_INT);
-			$query->bindValue(6, $range1, PDO::PARAM_INT);
-			$query->bindValue(7, $range2, PDO::PARAM_INT);
-			$query->execute();
-			
-			$rowCount = $query->rowCount();
-			
-			if ($rowCount != 0)
-			{					
-				while($row = $query->fetch())
-				{
-					//If we used this driver on current race week,
-					//IE-- we're changing our picks, this is a valid pick
-					if($row['RaceNumber'] >= $currentRace)
-					{
-						$badUser = true;
-						echo "Sorry you have picked that driver before:<br>\n";
-						echo $row['DriverName']." at ".$row['RaceName']."<br>\n";
-					}
-					
-				}
-				
-				if($badUser)
-				{
-					echo "<a href=\"index.php?content=team&leagueID=".$league."&teamID=".$userID."\">Please Try Again</a><br>\n";
-				}
-			}
-				
-			
-			
 			//Check if we already made picks & need update previous picks
 			if(!($query2 = $con->prepare("SELECT * FROM picks 
 			WHERE UserID = ? 
 			AND LeagueID = ? 
 			AND Season = ? 
-			AND RaceNumber = ?")))
+			AND TrackID = ?")))
 			{
 				echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 			}
@@ -125,9 +59,68 @@
 				}
 			}
 			
+			//Check if we already used these drivers
+			//Get range of races based off this race pick
+			$range1 = null;
+			$range2 = null;
+			if($raceNum <= 10)
+			{
+				$range1 = 0;
+				$range2 = 10;
+			}
+			elseif($raceNum >= 11 && $raceNum <= 20)
+			{
+				$range1 = 11;
+				$range2 = 20;
+			}
+			else
+			{
+				$range1 = 21;
+				$range2 = 21;
+			}
+			
+			if(!($query = $con->prepare("SELECT picks.*, drivers.DriverID, drivers.DriverName, tracks.TrackID, tracks.RaceName 
+			FROM picks, drivers, tracks 
+			WHERE picks.UserID = ? 
+			AND picks.LeagueID = ? 
+			AND (picks.DriverID = ?  OR picks.DriverID = ?) 
+			AND picks.season = ? 
+			AND (picks.TrackID >= ? AND picks.TrackID <= ?) 
+			AND picks.DriverID = drivers.DriverID 
+			AND picks.TrackID = tracks.TrackID")))
+			{
+				echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+			}
+			$query->bindValue(1, $userID, PDO::PARAM_INT);
+			$query->bindValue(2, $league, PDO::PARAM_INT);
+			$query->bindValue(3, $driver1, PDO::PARAM_INT);
+			$query->bindValue(4, $driver2, PDO::PARAM_INT);
+			$query->bindValue(5, $year, PDO::PARAM_INT);
+			$query->bindValue(6, $range1, PDO::PARAM_INT);
+			$query->bindValue(7, $range2, PDO::PARAM_INT);
+			$query->execute();
+			
+			$rowCount = $query->rowCount();
+			
+			if ($rowCount != 0)
+			{					
+				while($row = $query->fetch())
+				{
+					$badUser = true;
+					echo "Sorry you have picked that driver before:<br>\n";
+					echo $row['DriverName']." at ".$row['RaceName']."<br>\n";			
+					
+				}
+				
+				if($badUser)
+				{
+					echo "<a href=\"index.php?content=team&leagueID=".$league."&teamID=".$userID."\">Please Try Again</a><br>\n";
+				}
+			}		
+			
 			if(!$badUser)
 			{
-					if(!($query4 = $con->prepare("INSERT INTO picks (UserID, LeagueID, RaceNumber, DriverID, Season) 
+					if(!($query4 = $con->prepare("INSERT INTO picks (UserID, LeagueID, TrackID, DriverID, Season) 
 						VALUES(?, ?, ?, ?, ?)")))
 					{
 						echo "Prepare failed: (" . $con->errno . ") " . $con->error;
@@ -151,8 +144,7 @@
 					else
 					{
 						echo "An Error occurred adding picks";
-					}
-					
+					}				
 					
 			}
 			

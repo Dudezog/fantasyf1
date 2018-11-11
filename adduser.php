@@ -141,8 +141,8 @@
 			if($result)
 			{
 			   echo "<h1>Loading...</h1>";
-			   //Redirect user to My Fridge page
-				echo "<script> location.replace(\"index.php?content=dash\"); </script>";
+			   //Redirect user to Main User Page
+				echo "<script> location.replace(\"index.php?content=my_leagues\"); </script>";
 			}
 
 		?>

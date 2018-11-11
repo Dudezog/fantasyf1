@@ -29,75 +29,85 @@
 		$raceNum21 = new DateTime('2019-11-21');	
 		
 		if($userDate < $raceNum1){
-			$raceNumNum = 1;
+			$raceNum = 1;
 		}
 		elseif($userDate >= $raceNum2 && $userDate < $raceNum3){
-			$raceNumNum = 2;
+			$raceNum = 2;
 		}
 		elseif($userDate >= $raceNum3 && $userDate < $raceNum4){
-			$raceNumNum = 3;
+			$raceNum = 3;
 		}
 		
 		elseif($userDate >= $raceNum4 && $userDate < $raceNum5){
-			$raceNumNum = 4;
+			$raceNum = 4;
 		}
 			elseif($userDate >= $raceNum5 && $userDate < $raceNum6){
-			$raceNumNum = 5;
+			$raceNum = 5;
 		}
 			elseif($userDate >= $raceNum6 && $userDate < $raceNum7){
-			$raceNumNum = 6;
+			$raceNum = 6;
 		}
 			elseif($userDate >= $raceNum7 && $userDate < $raceNum8){
-			$raceNumNum = 7;
+			$raceNum = 7;
 		}
 			elseif($userDate >= $raceNum8 && $userDate < $raceNum9){
-			$raceNumNum = 8;
+			$raceNum = 8;
 		}
 			elseif($userDate >= $raceNum9 && $userDate < $raceNum10){
-			$raceNumNum = 9;
+			$raceNum = 9;
 		}
 			elseif($userDate >= $raceNum10 && $userDate < $raceNum11){
-			$raceNumNum = 10;
+			$raceNum = 10;
 		}
 			elseif($userDate >= $raceNum11 && $userDate < $raceNum12){
-			$raceNumNum = 11;
+			$raceNum = 11;
 		}
 			elseif($userDate >= $raceNum12 && $userDate < $raceNum13){
-			$raceNumNum = 12;
+			$raceNum = 12;
 		}
 			elseif($userDate >= $raceNum13 && $userDate < $raceNum14){
-			$raceNumNum = 13;
+			$raceNum = 13;
 		}
 			elseif($userDate >= $raceNum14 && $userDate < $raceNum15){
-			$raceNumNum = 14;
+			$raceNum = 14;
 		}
 			elseif($userDate >= $raceNum15 && $userDate < $raceNum16){
-			$raceNumNum = 15;
+			$raceNum = 15;
 		}
 			elseif($userDate >= $raceNum16 && $userDate < $raceNum17){
-			$raceNumNum = 16;
+			$raceNum = 16;
 		}
 			elseif($userDate >= $raceNum17 && $userDate < $raceNum18){
-			$raceNumNum = 17;
+			$raceNum = 17;
 		}
 			elseif($userDate >= $raceNum18 && $userDate < $raceNum19){
-			$raceNumNum = 18;
+			$raceNum = 18;
 		}
 			elseif($userDate >= $raceNum19 && $userDate < $raceNum20){
-			$raceNumNum = 19;
+			$raceNum = 19;
 		}
 			elseif($userDate >= $raceNum20 && $userDate < $raceNum21){
-			$raceNumNum = 20;
+			$raceNum = 20;
+		}
+			elseif($userDate >= $raceNum21 && $userDate < $raceNum22){
+			$raceNum = 21;
 		}
 			elseif($userDate >= $raceNum21){
-			$raceNumNum = 21;
+			$raceNum = 21;
 		}
 		
-		return $raceNumNum;
+		//Zero index in SQL table for tracks table
+		//Offset this
+		$raceNum--;
+		
+		return $raceNum;
 	}
 	
 	function isValidPick($raceNum)
 	{
+		//Adjust RaceNum Offset
+		$raceNum++;
+		
 		date_default_timezone_set("America/Chicago");
 		$isValidPick = false;
 		$cutOffDate = new DateTime();

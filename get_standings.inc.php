@@ -12,18 +12,29 @@
 	
 	echo "<p><h3>Standings</h3></p>\n";
 
-	//TO-DO:  Get actual standings
-	//For now, list all league members
-	
-	if(!($query = $con->prepare("SELECT users.UserID, users.UserName AS 'Name', memberships.UserID, memberships.LeagueID 
-	FROM users, memberships WHERE LeagueID=? AND users.UserID = memberships.UserID")))
+	$year = date('Y');	
+	//Get Standings	
+	if(!($query = $con->prepare("SELECT picks.*,
+								results.*, SUM(results.Total) AS 'Season Points',
+								users.UserID, users.UserName
+								FROM picks, results, users
+								WHERE 
+									picks.LeagueID = ? 
+									AND picks.Season = ?	   
+									AND picks.DriverID = results.DriverID
+									AND picks.TrackID = results.TrackID
+									AND PICKS.Season = results.Season
+									AND picks.UserID = users.UserID
+								GROUP BY picks.UserID    
+								ORDER BY 'Season Points' DESC")))
 	{
 		echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 	}
 	
 	$query->bindValue(1, $_GET['leagueID'], PDO::PARAM_INT);
+	$query->bindValue(2, $year, PDO::PARAM_INT);
 	$query->execute();
-	
+
 	$rowCount = $query->rowCount();
 	
 	if ($rowCount == 0)
@@ -32,11 +43,16 @@
 	}
 	else
 	{
-		//Multiple leagues, make user choose
+		
+		//TO-DO:
+		//Do this as a Table or DIVs so displays nicely
+		
 		while($row = $query->fetch())
 		{
-			echo $row['Name']."<br>";
+			echo $row['UserName'].": ".$row['Season Points']."<br>\n";
 		}
+				
+			
 	}
 
 

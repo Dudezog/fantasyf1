@@ -14,6 +14,7 @@ function loadRace()
     // code for IE6, IE5
     xhttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
+  
   xhttp.onreadystatechange = function()
   {
     if (this.readyState == 4 && this.status == 200)
@@ -27,49 +28,6 @@ function loadRace()
 </script>
 
 <table border="0" cellpadding="5" cellspacing="15" bgcolor=#FFFFFF>
-	<tr>
-		<td colspan="3">
-			<h3>My Picks</h3>
-		</td>
-	</tr>
-	<tr>
-		<?php
-			require_once('race_date_functions.inc.php');
-			$raceNum = getRaceNum();
-			
-			if(!($query = $con->prepare("SELECT picks.*, drivers.DriverID, drivers.DriverName 
-			FROM picks, drivers 
-			WHERE picks.DriverID = drivers.DriverID 
-			AND picks.RaceNumber= ? 
-			AND picks.UserID = ? 
-			AND LeagueID = ?")))
-			{
-				echo "Prepare failed: (" . $con->errno . ") " . $con->error;
-			}
-			$query->bindValue(1, $raceNum, PDO::PARAM_INT);
-			$query->bindValue(2, $_GET['teamID'], PDO::PARAM_INT);
-			$query->bindValue(3, $_GET['leagueID'], PDO::PARAM_INT);
-			$query->execute();
-			
-			$rowCount = $query->rowCount();
-			
-			if ($rowCount == 0)
-			{
-				echo "<td>No Picks Made!</td>\n";
-			}
-			else
-			{
-				$drivers = "";
-				while($row = $query->fetch())
-				{
-					$drivers .= $row['DriverName']. " ";			
-				}
-				
-				echo "<td><div id=\"picks\">".$drivers."</div></td>\n";	
-			}	
-
-		?>
-	</tr>
 		<tr>
 			<td>
 				<b>
@@ -93,12 +51,14 @@ function loadRace()
 	
 		<select name ="races" id="races" onchange="loadRace()" required>
 <?php
+		require_once('race_date_functions.inc.php');
+		$raceNum = getRaceNum();
 		
-		if(!($query = $con->prepare("SELECT * FROM tracks")))
+		if(!($query = $con->prepare("SELECT * FROM tracks WHERE TrackID >= ?")))
 		{
 			echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 		}
-		
+		$query->bindValue(1, $raceNum, PDO::PARAM_INT);
 		$query->execute();
 		
 		$rowCount = $query->rowCount();
@@ -132,7 +92,7 @@ function loadRace()
 		<select name ="driver1" id="driver1" required>
 		<?php
 			
-			if(!($query = $con->prepare("SELECT * FROM drivers")))
+			if(!($query = $con->prepare("SELECT * FROM drivers WHERE DriverID > 0")))
 			{
 				echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 			}
@@ -159,7 +119,7 @@ function loadRace()
 		<select name ="driver2" id="driver2" required>
 		<?php
 			
-			if(!($query = $con->prepare("SELECT * FROM drivers")))
+			if(!($query = $con->prepare("SELECT * FROM drivers WHERE DriverID > 0")))
 			{
 				echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 			}
@@ -191,4 +151,84 @@ function loadRace()
 		</form>
 	</td>	
 </tr>
+	<tr>
+		<td colspan="3">
+			<h3>My Picks</h3>
+		</td>
+	</tr>
+	<tr>
+		<?php
+			
+			//TO-DO:
+			//Get All of our picks this seaons and list them in a table
+					$tracks = array('Australia',
+						'Bahrain',
+						'China',
+						'Azerbaijan',
+						'Spain',
+						'Monaco',
+						'Canada',
+						'France',
+						'Austria',
+						'Great Britain',
+						'Germany',
+						'Hungary',
+						'Belgium',
+						'Italy',
+						'Singapore',
+						'Russia',
+						'Japan',
+						'United States',
+						'Mexico',
+						'Brazil',
+						'Abu Dhabi'						
+				);
+			
+			for($i = 0; $i < 21; $i++)
+			{
+				
+				if($i == $raceNum)
+				{
+					echo "<tr><td><b>*".$tracks[$i]."</b></td>\n";
+				}
+				else
+				{
+					echo "<tr><td>".$tracks[$i]."</td>\n";
+				}
+			
+			
+				if(!($query = $con->prepare("SELECT picks.*, drivers.DriverID, drivers.DriverName 
+				FROM picks, drivers
+				WHERE picks.DriverID = drivers.DriverID 
+				AND picks.TrackID = ? 
+				AND picks.UserID = ? 
+				AND LeagueID = ?")))
+				{
+					echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+				}
+				$query->bindValue(1, $i, PDO::PARAM_INT);
+				$query->bindValue(2, $_GET['teamID'], PDO::PARAM_INT);
+				$query->bindValue(3, $_GET['leagueID'], PDO::PARAM_INT);
+				$query->execute();
+				
+				$rowCount = $query->rowCount();
+				
+				if ($rowCount == 0)
+				{
+					echo "<td>No Picks Made!</td>\n";
+				}
+				else
+				{
+					$drivers = "";
+					while($row = $query->fetch())
+					{
+						echo "<td>".$row['DriverName']."</td>";			
+					}
+						
+				}
+				echo "</tr>\n";
+			}			
+
+		?>
+	</tr>
 </table>

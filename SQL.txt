@@ -1,0 +1,87 @@
+SQL
+
+Top Drivers from each race:
+
+
+SELECT results.DriverID, results.Total, drivers.DriverID, drivers.DriverName 
+FROM results, drivers 
+WHERE TrackID = 17 
+AND drivers.DriverID = results.DriverID
+ORDER BY Total DESC
+
+
+
+Drivers Total Season Points:
+
+SELECT results.DriverID, SUM(results.Total), drivers.DriverID, drivers.DriverName 
+FROM results, drivers 
+WHERE drivers.DriverID = 1
+AND results.DriverID = drivers.DriverID
+
+
+//Get all of your pick's points for week to week 
+
+SELECT picks.*, 
+drivers.DriverID, drivers.DriverName,
+results.*,
+tracks.RaceNumber, tracks.RaceName
+FROM picks, drivers, results, tracks
+WHERE 
+	picks.UserID = 1 
+	AND picks.LeagueID = 1 
+	AND picks.Season = '2018' 
+	AND picks.RaceNumber = 18	   
+	AND drivers.DriverID = picks.DriverID
+	AND results.DriverID = picks.DriverID
+	AND results.RaceNumber = picks.RaceNumber
+	AND tracks.RaceNumber = picks.RaceNumber
+
+
+
+SEASON:
+
+//Get every pick on the season and points
+SELECT picks.*,
+results.*
+FROM picks, results
+WHERE 
+	picks.UserID = 1 
+	AND picks.LeagueID = 1 
+	AND picks.Season = '2018'	   
+	AND picks.DriverID = results.DriverID
+	AND picks.RaceNumber = results.RaceNumber
+	AND PICKS.Season = results.Season
+
+
+
+//Get Season Total Points
+
+SELECT picks.*,
+results.*, SUM(results.Total) AS 'Season Points'
+FROM picks, results
+WHERE 
+	picks.UserID = 1 
+	AND picks.LeagueID = 1 
+	AND picks.Season = '2018'
+	AND picks.DriverID = results.DriverID
+	AND picks.RaceNumber = results.RaceNumber
+	AND PICKS.Season = results.Season
+	
+	
+
+STANDINGS
+
+SELECT picks.*,
+results.*, SUM(results.Total) AS 'Season Points',
+users.UserID, users.UserName
+FROM picks, results, users
+WHERE 
+    picks.LeagueID = 1 
+	AND picks.Season = '2018'	   
+	AND picks.DriverID = results.DriverID
+	AND picks.RaceNumber = results.RaceNumber
+	AND PICKS.Season = results.Season
+    AND picks.UserID = users.UserID
+GROUP BY picks.UserID    
+ORDER BY 'Season Points' DESC 
+	
