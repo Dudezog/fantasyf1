@@ -3,9 +3,12 @@ SQL
 Top Drivers from each race:
 
 
+//DriverID > 0 so we don't get our "No Pick" driver
+
 SELECT results.DriverID, results.Total, drivers.DriverID, drivers.DriverName 
 FROM results, drivers 
 WHERE TrackID = 17 
+AND drivers.DriverID > 0
 AND drivers.DriverID = results.DriverID
 ORDER BY Total DESC
 
@@ -24,17 +27,17 @@ AND results.DriverID = drivers.DriverID
 SELECT picks.*, 
 drivers.DriverID, drivers.DriverName,
 results.*,
-tracks.RaceNumber, tracks.RaceName
+tracks.TrackID, tracks.RaceName
 FROM picks, drivers, results, tracks
 WHERE 
 	picks.UserID = 1 
 	AND picks.LeagueID = 1 
 	AND picks.Season = '2018' 
-	AND picks.RaceNumber = 18	   
+	AND picks.TrackID = 18	   
 	AND drivers.DriverID = picks.DriverID
 	AND results.DriverID = picks.DriverID
-	AND results.RaceNumber = picks.RaceNumber
-	AND tracks.RaceNumber = picks.RaceNumber
+	AND results.TrackID = picks.TrackID
+	AND tracks.TrackID = picks.TrackID
 
 
 
@@ -49,7 +52,7 @@ WHERE
 	AND picks.LeagueID = 1 
 	AND picks.Season = '2018'	   
 	AND picks.DriverID = results.DriverID
-	AND picks.RaceNumber = results.RaceNumber
+	AND picks.TrackID = results.TrackID
 	AND PICKS.Season = results.Season
 
 
@@ -64,7 +67,7 @@ WHERE
 	AND picks.LeagueID = 1 
 	AND picks.Season = '2018'
 	AND picks.DriverID = results.DriverID
-	AND picks.RaceNumber = results.RaceNumber
+	AND picks.TrackID = results.TrackID
 	AND PICKS.Season = results.Season
 	
 	
@@ -79,9 +82,92 @@ WHERE
     picks.LeagueID = 1 
 	AND picks.Season = '2018'	   
 	AND picks.DriverID = results.DriverID
-	AND picks.RaceNumber = results.RaceNumber
+	AND picks.TrackID = results.TrackID
 	AND PICKS.Season = results.Season
     AND picks.UserID = users.UserID
 GROUP BY picks.UserID    
 ORDER BY 'Season Points' DESC 
+	
+
+	
+//Get League Champions
+
+//Mid SEASON
+
+SELECT picks.*,
+results.*, SUM(results.Total) AS 'Season Points',
+users.UserID, users.UserName
+FROM picks, results, users
+WHERE 
+    picks.LeagueID = 1 
+	AND picks.Season = '2018'	   
+	AND picks.DriverID = results.DriverID
+    AND results.TrackID BETWEEN 1 AND 10
+	AND picks.TrackID = results.TrackID
+	AND PICKS.Season = results.Season
+    AND picks.UserID = users.UserID
+GROUP BY picks.UserID    
+ORDER BY 'Season Points' DESC 	
+
+
+
+//Second Season
+
+SELECT picks.*,
+results.*, SUM(results.Total) AS 'Season Points',
+users.UserID, users.UserName
+FROM picks, results, users
+WHERE 
+    picks.LeagueID = 1 
+	AND picks.Season = '2018'	   
+	AND picks.DriverID = results.DriverID
+    AND results.TrackID BETWEEN 11 AND 20
+	AND picks.TrackID = results.TrackID
+	AND PICKS.Season = results.Season
+    AND picks.UserID = users.UserID
+GROUP BY picks.UserID    
+ORDER BY 'Season Points' DESC 
+	
+	
+	
+	
+//Championship
+
+SELECT picks.*,
+results.*, SUM(results.Total) AS 'Season Points',
+users.UserID, users.UserName
+FROM picks, results, users
+WHERE 
+    picks.LeagueID = 1 
+	AND picks.Season = '2018'	   
+	AND picks.DriverID = results.DriverID
+    AND results.TrackID = 21
+	AND picks.TrackID = results.TrackID
+	AND PICKS.Season = results.Season
+    AND picks.UserID = users.UserID
+GROUP BY picks.UserID    
+ORDER BY 'Season Points' DESC 	
+	
+	
+	
+//Tie Breakers
+
+SELECT picks.*,
+results.*, SUM(results.Total) AS 'Season Points',
+COUNT(IF(results.RaceFinishPoints = 50, 1, NULL)) 'First Places',
+COUNT(IF(results.RaceFinishPoints = 38, 1, NULL)) 'Second Places',
+COUNT(IF(results.RaceFinishPoints = 30, 1, NULL)) 'Third Places',
+COUNT(IF(results.QualifyingPoints = 5, 1, NULL)) 'Pole Positions',
+COUNT(IF(results.FastLapPoints = 2, 1, NULL)) 'Fast Laps',
+users.UserID, users.UserName
+FROM picks, results, users
+WHERE 
+    picks.LeagueID = 1 
+	AND picks.Season = '2018'	   
+	AND picks.DriverID = results.DriverID
+	AND picks.TrackID = results.TrackID
+	AND PICKS.Season = results.Season
+    AND picks.UserID = users.UserID
+GROUP BY picks.UserID    
+ORDER BY 'Season Points' DESC 	
 	

@@ -15,14 +15,16 @@
 		$json = file_get_contents(''.$url.'');
 		$obj = json_decode($json);
 		
+		echo "<textarea rows =\"25\" cols=\"100\">";
 		echo $json;
+		echo "</textarea>";
 		
 		if(!$obj->Error)
 		{
 			echo "<form action=\"admin.php\" method=\"post\">\n"; 
 			echo "<input type=\"hidden\" name=\"race\" value=\"".$raceNum."\">\n"; 
 			echo "<input type=\"hidden\" name=\"content\" value=\"add_results\">\n";  
-			echo "<input name=\"goButton\" type=\"submit\" value=\"Load Race\" />\n";  
+			echo "<input name=\"goButton\" type=\"submit\" value=\"Apply Results\" />\n";  
 			echo "</form>\n";
 			
 		}

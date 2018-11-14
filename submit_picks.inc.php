@@ -28,55 +28,24 @@
 				echo "Driver Picks must be different";
 			}
 			
-			//Check if we already made picks & need update previous picks
-			if(!($query2 = $con->prepare("SELECT * FROM picks 
-			WHERE UserID = ? 
-			AND LeagueID = ? 
-			AND Season = ? 
-			AND TrackID = ?")))
-			{
-				echo "Prepare failed: (" . $con->errno . ") " . $con->error;
-			}
-			$query2->bindValue(1, $userID, PDO::PARAM_INT);
-			$query2->bindValue(2, $league, PDO::PARAM_INT);
-			$query2->bindValue(3, $year, PDO::PARAM_INT);
-			$query2->bindValue(4, $raceNum, PDO::PARAM_INT);
-			$query2->execute();
-			
-			$rowCount2 = $query2->rowCount();
-			
-			if ($rowCount2 != 0)
-			{
-				while($row2 = $query2->fetch())
-				{
-					//Check if we already made picks & need update previous picks
-					if(!($query3 = $con->prepare("DELETE FROM picks WHERE PickID = ?")))
-					{
-						echo "Prepare failed: (" . $con->errno . ") " . $con->error;
-					}
-					$query3->bindValue(1, $row2['PickID'], PDO::PARAM_INT);
-					$query3->execute();
-				}
-			}
-			
 			//Check if we already used these drivers
 			//Get range of races based off this race pick
 			$range1 = null;
 			$range2 = null;
-			if($raceNum <= 10)
+			if($raceNum <= 9)
 			{
 				$range1 = 0;
-				$range2 = 10;
+				$range2 = 9;
 			}
-			elseif($raceNum >= 11 && $raceNum <= 20)
+			elseif($raceNum >= 10 && $raceNum <= 19)
 			{
-				$range1 = 11;
-				$range2 = 20;
+				$range1 = 10;
+				$range2 = 19;
 			}
 			else
 			{
-				$range1 = 21;
-				$range2 = 21;
+				$range1 = 20;
+				$range2 = 20;
 			}
 			
 			if(!($query = $con->prepare("SELECT picks.*, drivers.DriverID, drivers.DriverName, tracks.TrackID, tracks.RaceName 
@@ -106,10 +75,13 @@
 			{					
 				while($row = $query->fetch())
 				{
-					$badUser = true;
-					echo "Sorry you have picked that driver before:<br>\n";
-					echo $row['DriverName']." at ".$row['RaceName']."<br>\n";			
-					
+					//If we are editing a pick before the race started, it is a valid edit
+					if($raceNum != $row['TrackID'])
+					{
+						$badUser = true;
+						echo "Sorry you have picked that driver before:<br>\n";
+						echo $row['DriverName']." at ".$row['RaceName']."<br>\n";	
+					}			
 				}
 				
 				if($badUser)
@@ -120,20 +92,55 @@
 			
 			if(!$badUser)
 			{
-					if(!($query4 = $con->prepare("INSERT INTO picks (UserID, LeagueID, TrackID, DriverID, Season) 
-						VALUES(?, ?, ?, ?, ?)")))
+				//Get Picks ID
+				if(!($query = $con->prepare("SELECT PickID FROM picks 
+				WHERE UserID = ? 
+				AND LeagueID = ? 
+				AND Season = ? 
+				AND TrackID = ?")))
+				{
+					echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+				}
+				$query->bindValue(1, $userID, PDO::PARAM_INT);
+				$query->bindValue(2, $league, PDO::PARAM_INT);
+				$query->bindValue(3, $year, PDO::PARAM_INT);
+				$query->bindValue(4, $raceNum, PDO::PARAM_INT);
+				$query->execute();
+				
+				$rowCount = $query->rowCount();				
+				
+				if($rowCount == 2)
+				{
+					$picks = array();
+					$i = 0;
+					while($row = $query->fetch())
+					{
+						$picks[$i] = $row['PickID'];
+						$i++;
+					}
+				}
+				else
+				{
+					$badUser = true;
+				}
+				
+				if(!$badUser)
+				{
+					
+					if(!($query2 = $con->prepare("UPDATE picks SET DriverID = ? WHERE PickID = ?")))
 					{
 						echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 					}
-					$query4->bindValue(1, $userID, PDO::PARAM_INT);
-					$query4->bindValue(2, $league, PDO::PARAM_INT);
-					$query4->bindValue(3, $raceNum, PDO::PARAM_INT);
-					$query4->bindValue(4, $driver1, PDO::PARAM_INT);
-					$query4->bindValue(5, $year, PDO::PARAM_INT);
-					$resultDriver1 = $query4->execute();
+
+					//Driver 1
+					$query2->bindValue(1, $driver1, PDO::PARAM_INT);
+					$query2->bindValue(2, $picks[0], PDO::PARAM_INT);
+					$resultDriver1 = $query2->execute();
 					
-					$query4->bindValue(4, $driver2, PDO::PARAM_INT);
-					$resultDrier2 = $query4->execute();
+					//Driver 2
+					$query2->bindValue(1, $driver2, PDO::PARAM_INT);
+					$query2->bindValue(2, $picks[1], PDO::PARAM_INT);
+					$resultDrier2 = $query2->execute();
 					
 					if($resultDriver1 && $resultDrier2)
 					{
@@ -143,9 +150,9 @@
 					}
 					else
 					{
-						echo "An Error occurred adding picks";
+						echo "An Error occurred adding picks.  Please try again.";
 					}				
-					
+				}	
 			}
 			
 		}

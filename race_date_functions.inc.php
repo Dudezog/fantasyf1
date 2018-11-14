@@ -29,68 +29,68 @@
 		$raceNum21 = new DateTime('2019-11-21');	
 		
 		if($userDate < $raceNum1){
-			$raceNumNum = 1;
+			$raceNumNum = 0;
 		}
 		elseif($userDate >= $raceNum2 && $userDate < $raceNum3){
-			$raceNumNum = 2;
+			$raceNumNum = 1;
 		}
 		elseif($userDate >= $raceNum3 && $userDate < $raceNum4){
-			$raceNumNum = 3;
+			$raceNumNum = 2;
 		}
 		
 		elseif($userDate >= $raceNum4 && $userDate < $raceNum5){
-			$raceNumNum = 4;
+			$raceNumNum = 3;
 		}
 			elseif($userDate >= $raceNum5 && $userDate < $raceNum6){
-			$raceNumNum = 5;
+			$raceNumNum = 4;
 		}
 			elseif($userDate >= $raceNum6 && $userDate < $raceNum7){
-			$raceNumNum = 6;
+			$raceNumNum = 5;
 		}
 			elseif($userDate >= $raceNum7 && $userDate < $raceNum8){
-			$raceNumNum = 7;
+			$raceNumNum = 6;
 		}
 			elseif($userDate >= $raceNum8 && $userDate < $raceNum9){
-			$raceNumNum = 8;
+			$raceNumNum = 7;
 		}
 			elseif($userDate >= $raceNum9 && $userDate < $raceNum10){
-			$raceNumNum = 9;
+			$raceNumNum = 8;
 		}
 			elseif($userDate >= $raceNum10 && $userDate < $raceNum11){
-			$raceNumNum = 10;
+			$raceNumNum = 9;
 		}
 			elseif($userDate >= $raceNum11 && $userDate < $raceNum12){
-			$raceNumNum = 11;
+			$raceNumNum = 10;
 		}
 			elseif($userDate >= $raceNum12 && $userDate < $raceNum13){
-			$raceNumNum = 12;
+			$raceNumNum = 11;
 		}
 			elseif($userDate >= $raceNum13 && $userDate < $raceNum14){
-			$raceNumNum = 13;
+			$raceNumNum = 12;
 		}
 			elseif($userDate >= $raceNum14 && $userDate < $raceNum15){
-			$raceNumNum = 14;
+			$raceNumNum = 13;
 		}
 			elseif($userDate >= $raceNum15 && $userDate < $raceNum16){
-			$raceNumNum = 15;
+			$raceNumNum = 14;
 		}
 			elseif($userDate >= $raceNum16 && $userDate < $raceNum17){
-			$raceNumNum = 16;
+			$raceNumNum = 15;
 		}
 			elseif($userDate >= $raceNum17 && $userDate < $raceNum18){
-			$raceNumNum = 17;
+			$raceNumNum = 16;
 		}
 			elseif($userDate >= $raceNum18 && $userDate < $raceNum19){
-			$raceNumNum = 18;
+			$raceNumNum = 17;
 		}
 			elseif($userDate >= $raceNum19 && $userDate < $raceNum20){
-			$raceNumNum = 19;
+			$raceNumNum = 18;
 		}
 			elseif($userDate >= $raceNum20 && $userDate < $raceNum21){
-			$raceNumNum = 20;
+			$raceNumNum = 19;
 		}
 			elseif($userDate >= $raceNum21){
-			$raceNumNum = 21;
+			$raceNumNum = 20;
 		}
 		
 		return $raceNumNum;
@@ -105,6 +105,10 @@
 		
 		switch($raceNum)
 		{
+			case 0:
+				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+			break;
+			
 			case 1:
 				$cutOffDate = new DateTime('01-01-2018 00:00:00');
 			break;
@@ -170,25 +174,21 @@
 			break;
 			
 			case 17:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
-			break;
-			
-			case 18:
 				$cutOffDate->setDate(2018, 10, 19);
 				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
-			case 19:
+			case 18:
 				$cutOffDate->setDate(2018, 10, 26);
 				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
-			case 20:
+			case 19:
 				$cutOffDate->setDate(2018, 11, 09);
 				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
-			case 21:
+			case 20:
 				$cutOffDate->setDate(2018, 11, 23);
 				$cutOffDate->setTime(00, 00, 00);
 			break;

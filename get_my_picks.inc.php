@@ -72,13 +72,13 @@ function loadRace()
 			while($row = $query->fetch())
 			{
 				//Set our drop down to current race
-				if($row['RaceNumber'] == $raceNum)
+				if($row['TrackID'] == $raceNum)
 				{
-					echo "<option value=\"".$row['RaceNumber']."\" selected>".$row['RaceName']."</option>\n";
+					echo "<option value=\"".$row['TrackID']."\" selected>".$row['RaceName']."</option>\n";
 				}
 				else
 				{
-					echo "<option value=\"".$row['RaceNumber']."\">".$row['RaceName']."</option>\n";
+					echo "<option value=\"".$row['TrackID']."\">".$row['RaceName']."</option>\n";
 				}
 					
 			}
@@ -159,8 +159,6 @@ function loadRace()
 	<tr>
 		<?php
 			
-			//TO-DO:
-			//Get All of our picks this seaons and list them in a table
 					$tracks = array('Australia',
 						'Bahrain',
 						'China',
@@ -219,7 +217,6 @@ function loadRace()
 				}
 				else
 				{
-					$drivers = "";
 					while($row = $query->fetch())
 					{
 						echo "<td>".$row['DriverName']."</td>";			
@@ -230,5 +227,7 @@ function loadRace()
 			}			
 
 		?>
+
+		
 	</tr>
 </table>
