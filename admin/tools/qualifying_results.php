@@ -26,27 +26,27 @@
 		}
 		//All of our qualifiying pages
 		$links = array(
-			"https://www.formula1.com/en/results.html/2018/races/979/australia/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/980/bahrain/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/981/china/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/982/azerbaijan/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/983/spain/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/984/monaco/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/985/canada/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/986/france/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/987/austria/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/988/great-britain/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/989/germany/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/990/hungary/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/991/belgium/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/992/italy/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/993/singapore/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/994/russia/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/995/japan/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/996/united-states/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/997/mexico/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/998/brazil/qualifying.html",
-			"https://www.formula1.com/en/results.html/2018/races/999/abu-dhabi/qualifying.html"
+			"https://www.formula1.com/en/results.html/2019/races/1000/australia/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1001/bahrain/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1002/china/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1003/azerbaijan/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1004/spain/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1005/monaco/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1006/canada/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1007/france/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1008/austria/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1009/great-britain/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1010/germany/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1011/hungary/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1012/belgium/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1013/italy/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1014/singapore/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1015/russia/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1016/japan/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1017/united-states/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1018/mexico/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1019/brazil/qualifying.html",
+			"https://www.formula1.com/en/results.html/2019/races/1020/abu-dhabi/qualifying.html"
 			);
 
 		//Build link

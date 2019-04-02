@@ -7,7 +7,7 @@
 	$userName = $_POST['userName'];
 	$password = $_POST['password'];
 
-	if(!($query = $con->prepare("SELECT AdminID, AdminName FROM Admins where AdminName=? and Password = PASSWORD(?)")))
+	if(!($query = $con->prepare("SELECT AdminID, AdminName FROM admins where AdminName=? and Password = PASSWORD(?)")))
 	{
 		echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 	}

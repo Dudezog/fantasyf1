@@ -15,7 +15,7 @@
 			</td>
 		</tr>		
 		
-		<form action="index.php" method="post" target="_self">
+		<form action="index" method="post" target="_self">
 		
 		<tr>
 			<td>

@@ -7,6 +7,7 @@
 			$leagueName = $_POST['leagueName'];
 			$numPlayers = $_POST['players'];
 			$note = $_POST['note'];
+			$year = date("Y");
 			
 			//Validate form
 			$badUser = false;
@@ -36,10 +37,24 @@
 			   
 			   
 			   $result = $query->execute();
+			   $leagueID = $con->lastInsertId();
+			   $_GET['leagueID'] = $leagueID;
+			   
+			   //Insert into our Champions-keeping table
+			   if(!($query2 = $con->prepare("INSERT into champions (LeagueID, Season)". 
+				"VALUES(?, ?)")))
+				{
+					echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+				}
+			   $query2->bindValue(1, $leagueID, PDO::PARAM_INT);
+			   $query2->bindValue(2, $year, PDO::PARAM_STR);			   
+			   
+			   $result2 = $query2->execute();
+			   
 				
-			   if ($result)
+			   if ($result && $result2)
 			   {
-				   $lastID = $con->lastInsertId();
+				   
 				   echo "League Created!";
 				   
 				   //Add Leagure Creator as League Memeber
@@ -48,16 +63,46 @@
 					{
 						echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 					}
-				   $query2->bindValue(1, $lastID, PDO::PARAM_INT);
+				   $query2->bindValue(1, $leagueID, PDO::PARAM_INT);
 				   $query2->bindValue(2, $_COOKIE['userID'], PDO::PARAM_INT);
 				   $query2->bindValue(3, 1, PDO::PARAM_INT);				   
 				   
 				   $result2 = $query2->execute();
 				   
-				   if($result2)
-				   {
-					   $_GET['leagueID'] = $lastID;				   
+				   //Insert League Creator base picks for season
+				  if(!($query3 = $con->prepare("INSERT INTO picks (UserID, LeagueID, TrackID, DriverID, Season) 
+						VALUES(?, ?, ?, ?, ?)")))
+					{
+						echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+					}
+					$query3->bindValue(1, $_COOKIE['userID'], PDO::PARAM_INT);
+					$query3->bindValue(2, $leagueID, PDO::PARAM_INT);
+					
+					$query3->bindValue(4, 0, PDO::PARAM_INT); //Driver 0 == "No Pick Driver"
+					$query3->bindValue(5, $year, PDO::PARAM_STR);				   
+				   
+				    $error = false;
+				    
+					//Loop through, bind races 0-20 and add our "no picks" for each race
+					for($x = 0; $x < 21; $x++)
+					{
+						$query3->bindValue(3, $x, PDO::PARAM_INT);
+						//Execute x2 to make 2 No picks for each race
+						$resultA = $query3->execute();
+						$resultB = $query3->execute();
+						
+						if(!$resultA || !$resultB)
+					    {
+						   $error = true;
+					    }
+					}			   
+				   
+				   
+				   if($result2 && !$error)
+				   {		   
 					   require_once('invite_players.inc.php');
+					   
+					   echo "<p><a href =\"index.php?content=league&leagueID=".$leagueID."\">League Home</a></p>\n";
 				   }
 				   else
 				   {

@@ -1,41 +1,42 @@
 <?php
 
-	if(isset($_POST['race']))
+    if(isset($_POST['race']))
 	{
 		$raceNum = $_POST['race'];
-		$date1 = date("Y")."-01-01 00:00:00";
-		$date2 = date("Y")."-12-31 24:59:00";
-		$dateNow = date("Y-m-d H:i:s");
-		
-		//TO-DO
+		$year = date("Y");
+
 		// Check if results already in table
-		if(!($query = $con->prepare("SELECT * FROM results WHERE RaceNumber = ? AND DateTime BETWEEN ? AND ?")))
+		if(!($query = $con->prepare("SELECT * FROM results WHERE TrackID = ? AND Season = ?")))
 		{
 			echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 		}
 		$query->bindValue(1, $raceNum, PDO::PARAM_INT);
-		$query->bindValue(2, $date1, PDO::PARAM_INT);
-		$query->bindValue(3, $date2, PDO::PARAM_INT);
+		$query->bindValue(2, $year, PDO::PARAM_STR);
 		$query->execute();
 		
 		$rowCount = $query->rowCount();
 		
 		if($rowCount != 0)
 		{
-			while($row2 = $query2->fetch())
+			while($row = $query->fetch())
 			{
+				//////////////////////////////////
+				echo "Results ID:  ".$row['ResultID']."<br>";
+				/////////////////////////////////////
+				
 				//Remove previous results
 				if(!($query2 = $con->prepare("DELETE FROM results WHERE ResultID = ?")))
 				{
 					echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 				}
-				$query2->bindValue(1, $row2['ResultID'], PDO::PARAM_INT);
-				$query2->execute();
+				$query2->bindValue(1, $row['ResultID'], PDO::PARAM_INT);
+				//$query2->execute();
+				
 			}
 		}
 		
 		//Get Race Results
-		$url = "http://localhost/fantasyf1/admin/tools/index.php?id=".$raceNum;
+		$url = "http://www.bridgerest.com/fantasyf1/admin/tools/index.php?id=".$raceNum;
 		$json = file_get_contents(''.$url.'');
 		$obj = json_decode($json);
 		
@@ -57,12 +58,12 @@
 				echo "<p>pos change: ".$posChangePoints;
 				echo "<p>result: ".$resultPoints;
 				echo "<p>Total: ".$total;
-				echo "<p>date: ".$dateNow."<br><br>";
+				echo "<p>Season: ".$year."<br><br>";
 				
 			
 				//Insert Race Results
 				if(!($query3 = $con->prepare("INSERT INTO results (TrackID, DriverID, QualifyingPoints, FastLapPoints, PositionChangePoints, 
-				ResultPoints, Total, Date) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")))
+				RaceFinishPoints, Total, Season) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")))
 				{
 					echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 				}
@@ -73,7 +74,8 @@
 				$query3->bindValue(5, $posChangePoints, PDO::PARAM_INT);
 				$query3->bindValue(6, $resultPoints, PDO::PARAM_INT);
 				$query3->bindValue(7, $total, PDO::PARAM_INT);
-				$query3->bindValue(8, $dateNow, PDO::PARAM_INT);
+				$query3->bindValue(8, $year, PDO::PARAM_STR);
+				
 				$result3 = $query3->execute();
 				
 				if($result3)
@@ -84,6 +86,7 @@
 				{
 					echo "Error inserting result";
 				}
+	
 				
 			}
 			
@@ -160,6 +163,24 @@
 			break;
 			
 			case "Charles Leclerc": $driverID = 20;
+			break;
+			
+			case "Lando Norris": $driverID = 21;
+			break;
+			
+			case "Antonio Giovinazzi": $driverID = 22;
+			break;
+			
+			case "Daniil Kvyat": $driverID = 23;
+			break;
+			
+			case "Alexander Albon": $driverID = 24;
+			break;
+			
+			case "Robert Kubica": $driverID = 25;
+			break;
+			
+			case "George Russell": $driverID = 26;
 			break;
 			
 		}

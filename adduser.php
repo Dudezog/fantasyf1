@@ -142,7 +142,7 @@
 			{
 			   echo "<h1>Loading...</h1>";
 			   //Redirect user to Main User Page
-				echo "<script> location.replace(\"index.php?content=my_leagues\"); </script>";
+				echo "<script> location.replace(\"index?content=my_leagues\"); </script>";
 			}
 
 		?>

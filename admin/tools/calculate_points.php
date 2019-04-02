@@ -26,7 +26,7 @@
 		}	
 		 
 		
-		$url = "http://localhost/f1/index_ugly.php?id=".$track;
+		$url = "http://www.bridgerest.com/fantasyf1/admin/tools/index_ugly.php?id=".$track;
 		$json = file_get_contents(''.$url.'');
 		$obj = json_decode($json);
 		

@@ -25,29 +25,32 @@
 			$choice = 20;
 		}
 
+		
+
+		
 		//All race links
 		$links = array(
-			"https://www.formula1.com/en/results.html/2018/races/979/australia/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/980/bahrain/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/981/china/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/982/azerbaijan/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/983/spain/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/984/monaco/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/985/canada/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/986/france/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/987/austria/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/988/great-britain/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/989/germany/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/990/hungary/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/991/belgium/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/992/italy/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/993/singapore/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/994/russia/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/995/japan/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/996/united-states/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/997/mexico/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/998/brazil/race-result.html",
-			"https://www.formula1.com/en/results.html/2018/races/999/abu-dhabi/race-result.html"
+			"https://www.formula1.com/en/results.html/2019/races/1000/australia/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1001/bahrain/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1002/china/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1003/azerbaijan/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1004/spain/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1005/monaco/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1006/canada/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1007/france/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1008/austria/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1009/great-britain/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1010/germany/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1011/hungary/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1012/belgium/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1013/italy/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1014/singapore/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1015/russia/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1016/japan/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1017/united-states/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1018/mexico/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1019/brazil/race-result.html",
+			"https://www.formula1.com/en/results.html/2019/races/1020/abu-dhabi/race-result.html"
 			);
 
 		//Build link
@@ -115,7 +118,7 @@
 						"DriverNickName" => strip_tags($lines[$i + 5]),
 						"Constructor" => strip_tags($lines[$i + 7]),
 						"Laps" => strip_tags($lines[$i + 8]),
-						"Time/Retired" => strip_tags($lines[$i + 9]),
+						"Time" => strip_tags($lines[$i + 9]),
 						"Points" => strip_tags($lines[$i + 10])
 					);
 					$response["Result"][] = $driverData;

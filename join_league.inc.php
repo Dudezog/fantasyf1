@@ -14,7 +14,7 @@
 		
 		echo "<p>Please Log-in to Join\n";
 		
-		echo "<form action=\"add_league_member_validate.php\" method=\"post\" target=\"_self\">\n";
+		echo "<form action=\"add_league_member_validate\" method=\"post\" target=\"_self\">\n";
 		echo "<b>User Name:</b><br>\n";
 		echo "<input type=\"text\" size=\"20\" name=\"userName\"><br>\n";
 		echo "<p><b>Password:</b><br>\n";

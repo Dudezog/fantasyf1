@@ -24,29 +24,30 @@
 		if($choice > 20){
 			$choice = 20;
 		}
+			
 		//All of the starting grid links
 		$links = array(
-			"https://www.formula1.com/en/results.html/2018/races/979/australia/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/980/bahrain/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/981/china/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/982/azerbaijan/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/983/spain/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/984/monaco/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/985/canada/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/986/france/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/987/austria/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/988/great-britain/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/989/germany/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/990/hungary/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/991/belgium/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/992/italy/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/993/singapore/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/994/russia/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/995/japan/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/996/united-states/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/997/mexico/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/998/brazil/starting-grid.html",
-			"https://www.formula1.com/en/results.html/2018/races/999/abu-dhabi/starting-grid.html"
+			"https://www.formula1.com/en/results.html/2019/races/1000/australia/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1001/bahrain/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1002/china/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1003/azerbaijan/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1004/spain/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1005/monaco/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1006/canada/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1007/france/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1008/austria/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1009/great-britain/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1010/germany/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1011/hungary/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1012/belgium/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1013/italy/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1014/singapore/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1015/russia/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1016/japan/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1017/united-states/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1018/mexico/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1019/brazil/starting-grid.html",
+			"https://www.formula1.com/en/results.html/2019/races/1020/abu-dhabi/starting-grid.html"
 			);
 
 		//Build link

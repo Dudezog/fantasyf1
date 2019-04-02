@@ -19,11 +19,6 @@
 		{
 			echo "You are not in any leagues!<br>\n";
 		}
-		else if($rowCount == 1){
-			$row = $query->fetch();
-			//one league, just redirect to team page
-			echo "<script> location.replace(\"index.php?content=team&leagueID=".$row['LeagueID']."&teamID=".$userID."\"); </script>";
-		}
 		else
 		{
 			//Multiple leagues, make user choose

@@ -1,4 +1,4 @@
-<table width="100%" cellpadding="2"> 
+<table width="100%" cellpadding="5" cellpadding="5"> 
   <tr> 
     <td><h3>F1 Administration</h3></td> 
   </tr> 
@@ -14,7 +14,7 @@
    if (isset($_SESSION['f1_admin'])) 
    { 
 		echo "<tr><td>\n"; 
-		echo "<form action=\"admin.php\" method=\"get\">\n"; 
+		echo "<form action=\"admin\" method=\"get\">\n"; 
 		echo "<label><font color=\"#663300\" size=\"-1\">Races</font> </label>\n"; 
 		echo "<select name =\"race\" id=\"race\" required>"; 
 
@@ -66,6 +66,8 @@
 
       echo "<input name=\"goButton\" type=\"submit\" value=\"Load Race\" />\n";  
       echo "</form> </td></tr>\n"; 
+	  echo "<tr><td><a href=\"admin.php?content=league_champions\">Edit League Champions</a></td></tr>\n";
+	  echo "<tr><td><a href=\"admin.php?content=new_season\">Start New Season</a></td></tr>\n";
    } 
 ?> 
 </div>

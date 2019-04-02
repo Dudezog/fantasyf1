@@ -5,7 +5,7 @@
 		<p>
 			<h1>Log in:</h1>
 		</p>
-			<form action="validate.php" method="post" target="_self">
+			<form action="validate" method="post" target="_self">
 			<b>User Name:</b><br>
 			<input type="text" size="20" name="userName"><br>
 			<br />
@@ -20,7 +20,11 @@
 				<a href="index.php?content=register">Register</a>
 			</p>	
 			<p>
-				<!-- <a href="index.php?content=forgotpass">I Forgot My Password</a> -->
+				 <a href="index.php?content=forgotpass">
+					<button>
+						I signed up when I was on vacation and drunk and got no idea which swear word I used for my password
+					</button>
+				</a>
 			</p>
 		</td>
 	</tr>

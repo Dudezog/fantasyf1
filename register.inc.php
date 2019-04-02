@@ -15,7 +15,7 @@
 			</td>
 		</tr>		
 		
-		<form action="adduser.php" method="post" target="_self">
+		<form action="adduser" method="post" target="_self">
 		
 		<tr>
 			<td>

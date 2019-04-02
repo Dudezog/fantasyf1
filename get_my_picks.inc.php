@@ -47,18 +47,20 @@ function loadRace()
 		</tr>
 		<tr>
 			<td>
-				<form action="index.php" method="post" target="_self">
+				<form action="index" method="post" target="_self">
 	
 		<select name ="races" id="races" onchange="loadRace()" required>
 <?php
 		require_once('race_date_functions.inc.php');
 		$raceNum = getRaceNum();
+        
 		
-		if(!($query = $con->prepare("SELECT * FROM tracks WHERE TrackID >= ?")))
+		if(!($query = $con->prepare("SELECT * FROM tracks WHERE TrackID >= ? AND TrackID <= ?")))
 		{
 			echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 		}
 		$query->bindValue(1, $raceNum, PDO::PARAM_INT);
+		$query->bindValue(2, 19, PDO::PARAM_INT);
 		$query->execute();
 		
 		$rowCount = $query->rowCount();
@@ -92,7 +94,7 @@ function loadRace()
 		<select name ="driver1" id="driver1" required>
 		<?php
 			
-			if(!($query = $con->prepare("SELECT * FROM drivers WHERE DriverID > 0")))
+			if(!($query = $con->prepare("SELECT * FROM drivers WHERE IsActive = 1")))
 			{
 				echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 			}
@@ -119,7 +121,7 @@ function loadRace()
 		<select name ="driver2" id="driver2" required>
 		<?php
 			
-			if(!($query = $con->prepare("SELECT * FROM drivers WHERE DriverID > 0")))
+			if(!($query = $con->prepare("SELECT * FROM drivers WHERE IsActive = 1")))
 			{
 				echo "Prepare failed: (" . $con->errno . ") " . $con->error;
 			}

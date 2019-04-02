@@ -63,12 +63,12 @@
 			if($error)
 			{
 					echo "<tr><td><h2>Sorry, there was an error logging in.</h2></td>\n";
-					echo "<tr><td><a href=\"index.php?content=login\">Try again</a></td></tr>\n";
+					echo "<tr><td><a href=\"index?content=login\">Try again</a></td></tr>\n";
 			}
 			else
 			{
 				//Redirect user to members area
-				echo "<script> location.replace(\"index.php?content=my_leagues\"); </script>";
+				echo "<script> location.replace(\"index?content=my_leagues\"); </script>";
 			}
 
 		?>

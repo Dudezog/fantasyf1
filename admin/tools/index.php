@@ -45,44 +45,44 @@
 			$choice = 20;
 		}
 		
-		//All of our drivers in an array
 		$drivers = array( 'HAM',
 						  'BOT',
 						  'VET',
-						  'RAI',
-						  'RIC',
-						  'VER',
 						  'LEC',
-						  'ERI',
+						  'VER',
+						  'GAS',
 						  'MAG',
 						  'GRO',
-						  'OCO',
-						  'PER',
+						  'RIC',			  
 						  'HUL',
+						  'NOR',
 						  'SAI',
-						  'ALO',
-						  'VAN',
-						  'SIR',
+						  'RAI',
+						  'GIO',
 						  'STR',
-						  'GAS',
-						  'HAR'
+						  'PER',
+						  'KVY',
+						  'ALB',
+						  'RUS',
+						  'KUB'			 
 						  
 						);
+						
 		//Qualifying
-		$urlQualifying = "http://localhost/f1/qualifying_results.php?id=".$choice;
+		$urlQualifying = "http://www.bridgerest.com/fantasyf1/admin/tools/qualifying_results.php?id=".$choice;
 		$jsonQualifying = file_get_contents(''.$urlQualifying.'');
 		$objQualifying = json_decode($jsonQualifying);
 	
 		
-		$urlGrid = "http://localhost/f1/grid_pos.php?id=".$choice;
+		$urlGrid = "http://www.bridgerest.com/fantasyf1/admin/tools/grid_pos.php?id=".$choice;
 		$jsonGrid = file_get_contents(''.$urlGrid.'');
 		$objGrid = json_decode($jsonGrid);
 		
-		$urlResults = "http://localhost/f1/race_results.php?id=".$choice;
+		$urlResults = "http://www.bridgerest.com/fantasyf1/admin/tools/race_results.php?id=".$choice;
 		$jsonResults = file_get_contents(''.$urlResults.'');
 		$objResults = json_decode($jsonResults);
 		
-		$urlFastLap = "http://localhost/f1/fastest_lap.php?id=".$choice;
+		$urlFastLap = "http://www.bridgerest.com/fantasyf1/admin/tools/fastest_lap.php?id=".$choice;
 		$jsonFastLap = file_get_contents(''.$urlFastLap.'');
 		$objFastLap = json_decode($jsonFastLap);
 		
@@ -104,6 +104,7 @@
 				$qualifyingPos = -1;
 				$startingPos = -1;
 				$finishPos = -1;
+				$time = -1;
 				$isFastLap = false;
 				$data = array();
 				
@@ -129,6 +130,7 @@
 					if($item->DriverNickName == $driver)
 					{
 						$finishPos = $item->Position;
+						$time = $item->Time;
 						
 						//Grab all of our driver info while we're here
 						$data["DriverName"] = $item->DriverName; 
@@ -154,7 +156,7 @@
 				$data["RaceResult"] = $finishPos;
 				$data["IsFastLap"] = $isFastLap;
 				
-				$data["Points"][] = getPoints($qualifyingPos, $startingPos, $finishPos, $isFastLap);
+				$data["Points"][] = getPoints($qualifyingPos, $startingPos, $finishPos, $time, $isFastLap);
 				
 				$response["Drivers"][] = $data;
 				
@@ -175,7 +177,7 @@
 
 
 	
-	function getPoints($qualifyingPos, $startPos, $finishPos, $isFastLap)
+	function getPoints($qualifyingPos, $startPos, $finishPos, $time, $isFastLap)
 	{
 		$data = array("Total" => 0);
 		$points = 0;		
@@ -191,7 +193,7 @@
 			$data['QualifyingPoints'] = 0;
 		}
 		
-		if($finishPos == "NC" || $finishPos == "DQ")
+		if($finishPos == "NC" || $finishPos == "DQ" || $time == "DNF")
 		{
 			$points -= 15;
 			$data['PositionChange'] = -15;

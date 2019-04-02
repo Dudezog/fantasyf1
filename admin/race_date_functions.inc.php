@@ -3,30 +3,31 @@
 	{
 		$userDate = new DateTime('now');
 		
-		//Start days of each week
-		//Wednesday before race starts week
-		$raceNum1 = new DateTime('2018-01-01');
-		$raceNum2 = new DateTime('2018-01-02');
-		$raceNum3 = new DateTime('2018-01-03');
-		$raceNum4 = new DateTime('2018-01-04');
-		$raceNum5 = new DateTime('2018-01-05');
-		$raceNum6 = new DateTime('2018-01-06');
-		$raceNum7 = new DateTime('2018-01-07');	
-		$raceNum8 = new DateTime('2018-01-08');
-		$raceNum9 = new DateTime('2018-01-09');
-		$raceNum10 = new DateTime('2018-01-10');
-		$raceNum11 = new DateTime('2018-01-11');
-		$raceNum12 = new DateTime('2018-01-12');
-		$raceNum13 = new DateTime('2018-01-13');
-		$raceNum14 = new DateTime('2018-01-14');
-		$raceNum15 = new DateTime('2018-01-15');
-		$raceNum16 = new DateTime('2018-01-16');
-		$raceNum17 = new DateTime('2018-01-17');
+		//2019 Race starts
+		$raceNum1 = new DateTime('2019-03-17');
+		$raceNum2 = new DateTime('2019-03-31');
+		$raceNum3 = new DateTime('2019-04-14');
+		$raceNum4 = new DateTime('2019-04-28');
+		$raceNum5 = new DateTime('2019-05-12');
+		$raceNum6 = new DateTime('2019-05-26');
+		$raceNum7 = new DateTime('2019-06-09');	
+		$raceNum8 = new DateTime('2019-06-23');
+		$raceNum9 = new DateTime('2019-06-30');
+		$raceNum10 = new DateTime('2019-07-14');
+		$raceNum11 = new DateTime('2019-07-28');
+		$raceNum12 = new DateTime('2019-08-04');
+		$raceNum13 = new DateTime('2019-09-01');
+		$raceNum14 = new DateTime('2019-09-08');
+		$raceNum15 = new DateTime('2019-09-22');
+		$raceNum16 = new DateTime('2019-09-29');
+		$raceNum17 = new DateTime('2019-10-13');		
+		$raceNum18 = new DateTime('2019-10-27');
+		$raceNum19 = new DateTime('2019-11-03');
+		$raceNum20 = new DateTime('2019-11-17');
+		$raceNum21 = new DateTime('2019-12-01');	
 		
-		$raceNum18 = new DateTime('2018-10-17');
-		$raceNum19 = new DateTime('2018-10-24');
-		$raceNum20 = new DateTime('2018-11-07');
-		$raceNum21 = new DateTime('2019-11-21');	
+		
+		
 		
 		if($userDate < $raceNum1){
 			$raceNum = 1;
@@ -116,90 +117,107 @@
 		switch($raceNum)
 		{
 			case 1:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 03, 15);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 2:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 03, 29);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 3:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 04, 12);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 4:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 04, 26);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 5:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 05, 10);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 6:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 05, 24);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 7:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 06, 07);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 8:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 06, 21);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 9:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 06, 28);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 10:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 07, 12);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 11:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 07, 26);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 12:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 08, 02);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 13:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 08, 30);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 14:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 09, 06);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 15:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 09, 20);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 16:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 09, 27);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 17:
-				$cutOffDate = new DateTime('01-01-2018 00:00:00');
+				$cutOffDate->setDate(2019, 10, 11);
+				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 18:
-				$cutOffDate->setDate(2018, 10, 19);
+				$cutOffDate->setDate(2019, 10, 25);
 				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 19:
-				$cutOffDate->setDate(2018, 10, 26);
+				$cutOffDate->setDate(2019, 11, 01);
 				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 20:
-				$cutOffDate->setDate(2018, 11, 09);
+				$cutOffDate->setDate(2019, 11, 15);
 				$cutOffDate->setTime(00, 00, 00);
 			break;
 			
 			case 21:
-				$cutOffDate->setDate(2018, 11, 23);
+				$cutOffDate->setDate(2019, 11, 29);
 				$cutOffDate->setTime(00, 00, 00);
 			break;
 			

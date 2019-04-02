@@ -7,7 +7,7 @@
 	//Build link
 	//Note: No matter what race you click on the 'Fastest Lap' page from,
 	//The table contains every race's results
-	$myLink = "https://www.formula1.com/en/results.html/2018/fastest-laps/979/australia/race-result.html";	
+	$myLink = "https://www.formula1.com/en/results.html/2019/fastest-laps/1000/australia/race-result.html";	
 	
 	//Initilize array for holding all of the lines of our webpage
 	$lines = array();

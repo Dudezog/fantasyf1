@@ -11,7 +11,7 @@
 		//Need to offset array for url
 		$raceNum--;
 		
-		$url = "http://localhost/fantasyf1/admin/tools/index.php?id=".$raceNum;
+		$url = "http://www.bridgerest.com/fantasyf1/admin/tools/index.php?id=".$raceNum;
 		$json = file_get_contents(''.$url.'');
 		$obj = json_decode($json);
 		
@@ -21,7 +21,7 @@
 		
 		if(!$obj->Error)
 		{
-			echo "<form action=\"admin.php\" method=\"post\">\n"; 
+			echo "<form action=\"admin\" method=\"post\">\n"; 
 			echo "<input type=\"hidden\" name=\"race\" value=\"".$raceNum."\">\n"; 
 			echo "<input type=\"hidden\" name=\"content\" value=\"add_results\">\n";  
 			echo "<input name=\"goButton\" type=\"submit\" value=\"Apply Results\" />\n";  

@@ -17,6 +17,11 @@
 			echo "<p><u>League Notes</u><br>";
 			echo $leagueNote."<br>";
 			
+			echo '<p><h3><u>Members</u></h3></p>';
+			
+			require_once('get_league_members.inc.php');
+			
+			
 			if($_COOKIE['userID'] == $moderator)
 			{
 				require_once('lm_tools.inc.php');
